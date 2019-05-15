@@ -1,101 +1,105 @@
 package model;
 
-import myUtils.myIdGenerator;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import java.time.LocalDate;
 
+/**
+ * Class to represent an Activity model
+ */
 public class Activity {
 
-    int id;
     String name;
     String description;
     boolean complete;
     int hoursToComplete;
     int hoursCompleted;
-    int refreshFrequency;
-    LocalDate dueDate;
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * Gets name of the activity
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the description of the activity
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
-    public boolean getComplete(){
-        return complete;
-    }
-
+    /**
+     * gets hours required to complete the activity
+     * @return hours to complete
+     */
     public int getHoursToComplete() {
         return hoursToComplete;
     }
 
+    /**
+     * gets hours already spent doing the activity
+     * @return hours spent
+     */
     public int getHoursCompleted() {
         return hoursCompleted;
     }
 
-    public int getRefreshFrequency() {
-        return refreshFrequency;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
+    /**
+     * sets the name of the activity
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * sets the description of the activity
+     * @param description description to be set
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Sets complete property of activity
+     * @param complete wether or not the activity has been completed
+     */
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
 
+    /**
+     * Sets hours required to complete the activity
+     * @param hoursToComplete hours required
+     */
     public void setHoursToComplete(int hoursToComplete) {
         this.hoursToComplete = hoursToComplete;
     }
 
+    /**
+     * sets hours already spent doing the activity
+     * @param hoursCompleted
+     */
     public void setHoursCompleted(int hoursCompleted) {
         this.hoursCompleted = hoursCompleted;
     }
 
-    public void setRefreshFrequency(int refreshFrequency) {
-        this.refreshFrequency = refreshFrequency;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public Activity(String name, String description, int hoursToComplete, int refreshFrequency){
-        this.id = myIdGenerator.getNextId();
+    /**
+     * Constructor of the Activity class
+     * @param name name of the activity
+     * @param description description of the activity
+     * @param hoursToComplete hours rewuired to complete the activity
+     */
+    public Activity(String name, String description, int hoursToComplete){
         this.name = name;
         this.description = description;
         this.hoursToComplete = hoursToComplete;
-        this.refreshFrequency = refreshFrequency;
-        this.dueDate = null;
     }
 
-    public Activity(String name, String description, int hoursToComplete, int refreshFrequency, LocalDate dueDate){
-        this.id = myIdGenerator.getNextId();
-        this.name = name;
-        this.description = description;
-        this.hoursToComplete = hoursToComplete;
-        this.refreshFrequency = refreshFrequency;
-        this.dueDate = dueDate;
-    }
-
+    /**
+     * Empty constructor for easier calls
+     */
     public  Activity(){}
 
 }

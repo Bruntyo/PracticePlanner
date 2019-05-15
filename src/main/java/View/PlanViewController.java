@@ -23,6 +23,8 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import model.Activity;
 import model.Goal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ import static java.lang.StrictMath.abs;
 
 public class PlanViewController implements Initializable {
 
+    public static final Logger logger = LoggerFactory.getLogger(PlanViewController.class);
 
     private PlanController planController = PlanController.getInstance();
     private ActivityController activityController = ActivityController.getInstance();
@@ -43,8 +46,6 @@ public class PlanViewController implements Initializable {
     Button backButton;
     @FXML
     Label profileName;
-    @FXML
-    Pane goalsPane;
     @FXML
     TextFlow descriptionTextFlow;
     @FXML
@@ -61,14 +62,23 @@ public class PlanViewController implements Initializable {
     Label progressBarLabel;
 
 
-
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        logger.info("Initializing " + this.getClass().getSimpleName());
         refresh();
 
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Stepping into Main Scene");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation((getClass().getResource("/fxml/mainScene.fxml")));
         Parent root = fxmlLoader.load();
@@ -80,6 +90,7 @@ public class PlanViewController implements Initializable {
     }
 
     public void handleAddNewActivityAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Stepping into Activity Creation Scene");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation((getClass().getResource("/fxml/createActivityScene.fxml")));
         Parent root = fxmlLoader.load();
@@ -91,7 +102,7 @@ public class PlanViewController implements Initializable {
     }
 
     private void refresh(){
-
+        logger.info("Refreshing page");
         profileName.setText("Welcome User");
         planName.setText(planController.getActivePlan().getName());
         descriptionText.setText(planController.getActivePlan().getDescription());
@@ -124,6 +135,7 @@ public class PlanViewController implements Initializable {
     }
 
     private void handleActivityClicked(Activity activity) throws IOException{
+        logger.info("Stepping into Activity Scene");
         System.out.println("Button clicked: " + activity.getName());
         activityController.setActiveActivity(activity);
 

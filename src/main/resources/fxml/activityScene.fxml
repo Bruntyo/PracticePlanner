@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ActivityViewController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ActivityViewController">
   <children>
     <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -46,9 +46,8 @@
             </Pane>
             <Pane layoutX="33.0" layoutY="136.0" prefHeight="200.0" prefWidth="301.0">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Hours to complete:" />
-                  <Label layoutX="14.0" layoutY="56.0" text="Hours completed:" />
-                  <Button fx:id="completeButton" layoutX="14.0" layoutY="161.0" mnemonicParsing="false" text="Complete" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Minutes to complete:" />
+                  <Label layoutX="14.0" layoutY="56.0" text="Minutes completed:" />
                   <Button fx:id="changeHoursToCompleteButton" layoutX="179.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChangeHoursToCompleteAction" text="Change" />
                   <Button fx:id="changeHoursCompletedButton" layoutX="179.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleChangeHoursCompletedAction" text="Change" />
                   <Label fx:id="hoursToComplete" layoutX="137.0" layoutY="14.0" text="Num" />

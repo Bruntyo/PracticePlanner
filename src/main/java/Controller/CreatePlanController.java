@@ -1,13 +1,15 @@
 package controller;
 
 import model.Plan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.inject.Singleton;
-import java.lang.annotation.Annotation;
-
+/**
+ * Class to handle creation of new plans
+ */
 public class CreatePlanController {
 
-
+    public static final Logger logger = LoggerFactory.getLogger(CreatePlanController.class);
 
     MainController mainController = MainController.getInstance();
     PlanController planController = PlanController.getInstance();
@@ -21,10 +23,12 @@ public class CreatePlanController {
         return instance;
     }
 
-    private CreatePlanController(){
-    }
-
+    /**
+     * Creates a new plan and adds it to the main list of plans
+     * @param plan
+     */
     public void createAndAddPlan(Plan plan){
+        logger.info("Adding new plan");
         planController.setActivePlan(plan);
         planController.setAllProperties(plan);
         mainController.addPlan(plan);

@@ -1,7 +1,7 @@
 package view;
 
 import controller.ActivityController;
-import controller.PlanController;
+import controller.StartController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Arc;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class ActivityViewController implements Initializable {
 
+    public static final Logger logger = LoggerFactory.getLogger(ActivityViewController.class);
 
     @FXML
     public AnchorPane anchorPane;
@@ -46,9 +50,6 @@ public class ActivityViewController implements Initializable {
     public Label progressLabel;
 
     @FXML
-    public Button completeButton;
-
-    @FXML
     public Button changeHoursToCompleteButton;
 
     @FXML
@@ -67,10 +68,13 @@ public class ActivityViewController implements Initializable {
     public TextField hiddenCompleted;
 
     ActivityController activityController = ActivityController.getInstance();
+    StartController startController = StartController.getInstance();
     int changeToComplete;
     int changeCompleted;
+    User user;
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Stepping into plan Scene");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation((getClass().getResource("/fxml/planScene.fxml")));
         Parent root = fxmlLoader.load();
@@ -97,7 +101,7 @@ public class ActivityViewController implements Initializable {
         activityController.getActiveActivity().setHoursToComplete(changeToComplete);
         hiddenToComplete.setVisible(false);
         hiddenToComplete.setDisable(true);
-        setProgressArc();
+        setProgressArc(progressArc);
         hoursCompleted.setText("" + activityController.getActiveActivity().getHoursCompleted());
         hoursToComplete.setText("" + activityController.getActiveActivity().getHoursToComplete());
     }
@@ -107,20 +111,32 @@ public class ActivityViewController implements Initializable {
         activityController.getActiveActivity().setHoursCompleted(changeCompleted);
         hiddenCompleted.setVisible(false);
         hiddenCompleted.setDisable(true);
-        setProgressArc();
+        setProgressArc(progressArc);
         hoursCompleted.setText("" + activityController.getActiveActivity().getHoursCompleted());
         hoursToComplete.setText("" + activityController.getActiveActivity().getHoursToComplete());
     }
 
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        logger.info("Initializing " + this.getClass().getSimpleName());
+        setProgressArc(progressArc);
+        user = startController.getUser();
         nameLabel.setText(activityController.getActiveActivity().getName());
         descriptionLabel.setText(activityController.getActiveActivity().getDescription());
         hoursCompleted.setText("" + activityController.getActiveActivity().getHoursCompleted());
         hoursToComplete.setText("" + activityController.getActiveActivity().getHoursToComplete());
     }
 
-    private void setProgressArc(){
+    public void setProgressArc(Arc progressArc){
         progressArc.setLength(360*
                 (((double)activityController.getActiveActivity().getHoursCompleted())/
                         ((double)activityController.getActiveActivity().getHoursToComplete())));

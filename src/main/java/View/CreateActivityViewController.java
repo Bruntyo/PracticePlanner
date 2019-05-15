@@ -1,5 +1,6 @@
 package view;
 
+import controller.ActivityController;
 import controller.PlanController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Activity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateActivityViewController implements Initializable {
+
+    public static final Logger logger = LoggerFactory.getLogger(CreateActivityViewController.class);
 
     @FXML
     public AnchorPane anchorPane;
@@ -53,13 +58,23 @@ public class CreateActivityViewController implements Initializable {
     Activity activityToCreate = new Activity();
 
 
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        logger.info("Initializing " + this.getClass().getSimpleName());
         choiceBox = new ChoiceBox();
         choiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7));
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Stepping into Main Scene");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation((getClass().getResource("/fxml/mainScene.fxml")));
         Parent root = fxmlLoader.load();
@@ -72,15 +87,12 @@ public class CreateActivityViewController implements Initializable {
     }
 
     public void handleDoneAction(ActionEvent actionEvent) throws IOException{
+        logger.info("Creating new Activity and Stepping into Plan Scene");
         activityToCreate.setName(nameTextField.getText());
         activityToCreate.setDescription(descriptionTextField.getText());
         activityToCreate.setComplete(false);
         activityToCreate.setHoursCompleted(0);
-        activityToCreate.setHoursToComplete(Integer.parseInt(hoursTextField.getText()));
-        if(choiceBox.isVisible() && choiceBox.getValue() != null)
-            activityToCreate.setRefreshFrequency(Integer.parseInt(choiceBox.getValue().toString()));
-        if(datePicker.isVisible() && datePicker.getValue() != null)
-            activityToCreate.setDueDate(datePicker.getValue());
+        activityToCreate.setHoursToComplete(Integer.parseInt(hoursTextField.getText()) * 60);
         planController.getActivePlan().addActivity(activityToCreate);
 
         FXMLLoader fxmlLoader = new FXMLLoader();

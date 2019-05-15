@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
     <children>
         <AnchorPane fx:id="anchor" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
@@ -25,8 +26,10 @@
                     </content>
                 </ScrollPane>
                 <Label fx:id="profileName" layoutX="14.0" layoutY="369.0" text="Welcome ProfileName" />
-                <Button fx:id="createNewPlanButton" layoutX="230.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Create New Plan" onAction="#handleCreateNewPlan" />
+                <Button fx:id="createNewPlanButton" layoutX="230.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleCreateNewPlan" prefHeight="25.0" prefWidth="181.0" text="Create New Plan" />
                 <Button fx:id="exitButton" layoutX="574.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleExitAction" text="Exit" />
+            <Button fx:id="setNameButton" layoutX="14.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleSetNameAction" text="Set Name" />
+            <TextField fx:id="enterNameField" disable="true" layoutX="14.0" layoutY="341.0" onAction="#handleEnterNameAction" promptText="Enter Name" visible="false" />
             </children>
         </AnchorPane>
     </children>

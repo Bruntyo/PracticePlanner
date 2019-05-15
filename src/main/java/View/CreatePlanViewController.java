@@ -1,6 +1,8 @@
 package view;
 
+import controller.ActivityController;
 import controller.CreatePlanController;
+import controller.StartController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +17,17 @@ import model.Activity;
 import model.Goal;
 import model.Plan;
 import model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePlanViewController {
+
+    public static final Logger logger = LoggerFactory.getLogger(CreatePlanViewController.class);
+
     @FXML
     public AnchorPane anchorPane;
     @FXML
@@ -57,16 +64,7 @@ public class CreatePlanViewController {
     List<Activity> activityList = new ArrayList<>();
 
     CreatePlanController createPlanController = CreatePlanController.getInstance();
-
-    public void handleAddGoalAction(){
-        hiddenPane.setVisible(true);
-        hiddenPane.setDisable(false);
-        for (Node node: hiddenPane.getChildren()) {
-            node.setDisable(false);
-            node.setVisible(true);
-        }
-
-    }
+    StartController startController = StartController.getInstance();
 
     public void handleHiddenAddAction() {
 
@@ -103,6 +101,7 @@ public class CreatePlanViewController {
     }
 
     public void handleCreatePlanAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Creating plan and Stepping into Main Scene");
         planToCreate.setName(nameTextField.getText());
         planToCreate.setDescription(descriptionTextField.getText());
         planToCreate.setCompleted(false);
@@ -123,6 +122,9 @@ public class CreatePlanViewController {
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
+        logger.info("Stepping into Main Scene");
+        startController.saveUser(startController.getUser());
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation((getClass().getResource("/fxml/mainScene.fxml")));
         Parent root = fxmlLoader.load();

@@ -8,13 +8,12 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CreatePlanViewController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CreatePlanViewController">
   <children>
     <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -22,7 +21,6 @@
             <Button fx:id="backButton" layoutX="585.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleBackAction" text="Back" />
             <TextField fx:id="nameTextField" layoutX="246.0" layoutY="34.0" promptText="Name" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="245.0" />
             <TextArea fx:id="descriptionTextField" layoutX="33.0" layoutY="72.0" prefHeight="38.0" prefWidth="573.0" promptText="Description" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-            <ToggleButton fx:id="dueByToggleButton" layoutX="29.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Due by" />
             <DatePicker fx:id="datePicker" disable="true" layoutX="112.0" layoutY="160.0" promptText="Select date" visible="false" />
             <Button fx:id="doneButton" layoutX="31.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleCreatePlanAction" prefHeight="31.0" prefWidth="97.0" text="Done" />
             <Separator layoutX="317.0" layoutY="121.0" orientation="VERTICAL" prefHeight="200.0" />
@@ -53,7 +51,6 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Button fx:id="addGoalButton" layoutX="30.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleAddGoalAction" text="Add Goal" />
             <Label layoutX="112.0" layoutY="125.0" text="Hours to complete" />
             <TextField fx:id="hoursTextField" layoutX="31.0" layoutY="121.0" prefHeight="25.0" prefWidth="66.0" promptText="Hours" />
          </children>
